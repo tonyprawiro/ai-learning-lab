@@ -185,10 +185,12 @@ def get_cloudwatch_logs():
         limit=20
     )
 
-    return [
-        event["message"]
-        for event in response.get("events", [])
-    ]
+    return {
+        "log_events": [
+            event["message"]
+            for event in response.get("events", [])
+        ]
+    }
 
 
 def get_lambda_configuration():
