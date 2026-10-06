@@ -405,11 +405,11 @@ def lambda_handler(event, context):
             "body": json.dumps(result, default=str)
         }
 
-    evidence = {
-        "cloudwatch_logs": get_cloudwatch_logs(),
-        "lambda_configuration": get_lambda_configuration(),
-        "dynamodb_table": describe_dynamodb_table()
-    }
+    # evidence = {
+    #     "cloudwatch_logs": get_cloudwatch_logs(),
+    #     "lambda_configuration": get_lambda_configuration(),
+    #     "dynamodb_table": describe_dynamodb_table()
+    # }
 
     diagnosis = investigate_with_claude()
 
@@ -431,7 +431,7 @@ def lambda_handler(event, context):
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "evidence": evidence,
+            #"evidence": evidence,
             "diagnosis": diagnosis,
             "remediation": remediation,
             "verification": verification,
