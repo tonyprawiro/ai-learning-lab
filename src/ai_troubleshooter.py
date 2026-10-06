@@ -203,6 +203,26 @@ def test_claude_agent():
     diagnosis = parse_claude_diagnosis(message)
     return diagnosis
 
+def investigate_with_claude():
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "text": (
+                        "Investigate the current state of the task-app "
+                        "application and identify the root cause of any "
+                        "failure. Use the available tools to gather the "
+                        "evidence you need. Do not perform remediation."
+                    )
+                }
+            ]
+        }
+    ]
+    response = run_agent(messages)
+    message = response["output"]["message"]
+    return parse_claude_diagnosis(message)
+
 def execute_tool(tool_name, tool_input):
     if tool_name == "get_lambda_configuration":
         return get_lambda_configuration()
@@ -391,7 +411,7 @@ def lambda_handler(event, context):
         "dynamodb_table": describe_dynamodb_table()
     }
 
-    diagnosis = simulate_claude(evidence)
+    diagnosis = investigate_with_claude()
 
     remediation = None
     verification = None
