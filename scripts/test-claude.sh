@@ -1,0 +1,1 @@
+aws lambda invoke --function-name ai-troubleshooter --payload '{"test_claude":true}' --cli-binary-format raw-in-base64-out --region ap-southeast-1 claude-test.json && python3 -m json.tool claude-test.json
