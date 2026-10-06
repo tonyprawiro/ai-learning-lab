@@ -94,8 +94,17 @@ Rules:
 6. Do not claim that remediation succeeded until the application has been verified.
 7. Base conclusions only on evidence obtained through the available tools.
 
-When you have completed your investigation and identified the root cause,
-return your final diagnosis as JSON only, using exactly this structure:
+Your final response MUST contain only one valid JSON object.
+
+Do not include:
+- explanatory text before the JSON
+- explanatory text after the JSON
+- markdown
+- code fences
+
+The entire final response must be parseable directly with json.loads().
+
+Use exactly this structure:
 
 {
     "status": "ROOT_CAUSE_IDENTIFIED",
@@ -109,8 +118,6 @@ return your final diagnosis as JSON only, using exactly this structure:
     },
     "requires_human_approval": true
 }
-
-Do not wrap the JSON in markdown code fences.
 """
 
 def call_claude(messages):
