@@ -1,8 +1,10 @@
+src $ sh ~/test-claude.sh 
 {
     "StatusCode": 200,
     "ExecutedVersion": "$LATEST"
 }
 {
     "statuscode": 200,
-    "body": "{\"role\": \"assistant\", \"content\": [{\"text\": \"The Lambda function's TABLE_NAME environment variable is set to \\\"appdata-wrong\\\", but the actual DynamoDB table name is \\\"appdata\\\". This mismatch in configuration is likely the root cause of the application failure.\\n\\n{\\n    \\\"status\\\": \\\"ROOT_CAUSE_IDENTIFIED\\\",\\n    \\\"root_cause\\\": \\\"The task-app Lambda function is configured with an incorrect DynamoDB table name in the TABLE_NAME environment variable. The actual table name is 'appdata' but the function is configured to use 'appdata-wrong'.\\\",\\n    \\\"proposed_remediation\\\": {\\n        \\\"action\\\": \\\"update_lambda_configuration\\\",\\n        \\\"function\\\": \\\"task-app\\\",\\n        \\\"environment_variable\\\": \\\"TABLE_NAME\\\",\\n        \\\"current_value\\\": \\\"appdata-wrong\\\",\\n        \\\"proposed_value\\\": \\\"appdata\\\"\\n    },\\n    \\\"requires_human_approval\\\": true\\n}\"}]}"
+    "body": "{\"status\": \"ROOT_CAUSE_IDENTIFIED\", \"root_cause\": \"The task-app Lambda function is configured with an incorrect DynamoDB table name in the TABLE_NAME environment variable. The actual DynamoDB table name is 'appdata', but the Lambda function is configured to use 'appdata-wrong'.\", \"proposed_remediation\": {\"action\": \"update_lambda_configuration\", \"function\": \"task-app\", \"environment_variable\": \"TABLE_NAME\", \"current_value\": \"appdata-wrong\", \"proposed_value\": \"appdata\"}, \"requires_human_approval\": true}"
 }
+src $ 
