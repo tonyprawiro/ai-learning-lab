@@ -120,6 +120,20 @@ Use exactly this structure:
 }
 """
 
+def parse_claude_diagnosis(message):
+    text = "".join(
+        block.get("text", "")
+        for block in message.get("content", [])
+    )
+
+    start = text.find("{")
+    end = text.rfind("}")
+
+    if start == -1 or end == -1 or end <= start:
+        raise ValueError("Claude did not return a JSON diagnosis")
+
+    return json.loads(text[start:end + 1])
+
 def call_claude(messages):
     return bedrock.converse(
         modelId=MODEL_ID,
@@ -185,7 +199,9 @@ def test_claude_agent():
         }
     ]
     response = run_agent(messages)
-    return response["output"]["message"]
+    message = response["output"]["message"]
+    diagnosis = parse_claude_diagnosis(message)
+    return diagnosis
 
 def execute_tool(tool_name, tool_input):
     if tool_name == "get_lambda_configuration":
