@@ -93,6 +93,24 @@ Rules:
 5. Never use a remediation tool unless explicit human approval has been provided.
 6. Do not claim that remediation succeeded until the application has been verified.
 7. Base conclusions only on evidence obtained through the available tools.
+
+When you have completed your investigation and identified the root cause,
+return your final diagnosis as JSON only, using exactly this structure:
+
+{
+    "status": "ROOT_CAUSE_IDENTIFIED",
+    "root_cause": "description of the evidence-based root cause",
+    "proposed_remediation": {
+        "action": "tool name",
+        "function": "target function",
+        "environment_variable": "variable name",
+        "current_value": "current value",
+        "proposed_value": "proposed value"
+    },
+    "requires_human_approval": true
+}
+
+Do not wrap the JSON in markdown code fences.
 """
 
 def call_claude(messages):
