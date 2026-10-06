@@ -1,10 +1,22 @@
-src $ sh ~/test-claude.sh 
-{
-    "StatusCode": 200,
-    "ExecutedVersion": "$LATEST"
-}
-{
-    "statuscode": 200,
-    "body": "{\"status\": \"ROOT_CAUSE_IDENTIFIED\", \"root_cause\": \"The task-app Lambda function is configured with an incorrect DynamoDB table name in the TABLE_NAME environment variable. The actual DynamoDB table name is 'appdata', but the Lambda function is configured to use 'appdata-wrong'.\", \"proposed_remediation\": {\"action\": \"update_lambda_configuration\", \"function\": \"task-app\", \"environment_variable\": \"TABLE_NAME\", \"current_value\": \"appdata-wrong\", \"proposed_value\": \"appdata\"}, \"requires_human_approval\": true}"
-}
-src $ 
+STEP 2  ›  AI AGENT INVESTIGATION
+────────────────────────────────────────────────────────────
+
+Invoking troubleshooting agent...
+
+✓  ROOT CAUSE IDENTIFIED
+
+AGENT DIAGNOSIS
+────────────────────────────────────────────────────────────
+The TABLE_NAME environment variable in the Lambda function is incorrectly set to 'appdata-wrong', which does not match the actual DynamoDB table name 'appdata' used by the application.
+
+PROPOSED REMEDIATION
+────────────────────────────────────────────────────────────
+Action          update_lambda_configuration
+Function        task-app
+Configuration   TABLE_NAME
+Current value   appdata-wrong
+Proposed value  appdata
+
+⚠  HUMAN APPROVAL REQUIRED
+
+No remediation has been performed.
