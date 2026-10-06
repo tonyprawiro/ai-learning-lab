@@ -48,9 +48,11 @@ TOOLS = [
                     "task-app application, including its name, stats, and ARN."
                 ),
                 "inputSchema": {
-                    "type": "object",
-                    "properties": {},
-                    "required": []
+                    "json": {
+                        "type": "object",
+                        "properties": {},
+                        "required": []
+                    }
                 }
             }
         },
